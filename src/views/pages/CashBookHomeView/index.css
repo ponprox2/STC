@@ -1,0 +1,67 @@
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif, 'RobotoBoid';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f6f9fc;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'SFProTextSemibold';
+  src: url('/src/fonts/SFProText-Semibold.ttf');
+  src: url('/src/fonts/SFProText-Semibold.ttf?#iefix')
+      format('embedded-opentype'),
+    url('/src/fonts/SFProText-Semibold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFProTextMedium';
+  src: url('/src/fonts/SFProText-Medium.ttf');
+  src: url('/src/fonts/SFProText-Medium.ttf?#iefix') format('embedded-opentype'),
+    url('/src/fonts/SFProText-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SFProTextRegular';
+  src: url('/src/fonts/SFProText-Regular.ttf');
+  src: url('/src/fonts/SFProText-Regular.ttf?#iefix')
+      format('embedded-opentype'),
+    url('/src/fonts/SFProText-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFProTextBold';
+  src: url('/src/theme/SF-Pro-Text-Bold.otf');
+  src: url('/src/theme/SF-Pro-Text-Bold.otf?#iefix') format('embedded-opentype'),
+    url('/src/theme/SF-Pro-Text-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoBoid';
+  src: url('/src/fonts/Roboto-Bold.ttf');
+  src: url('/src/fonts/Roboto-Bold.ttf?#iefix') format('embedded-opentype'),
+    url('/src/fonts/Roboto-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'RobotoMedium';
+  src: url('/src/fonts/Roboto-Medium.ttf');
+  src: url('/src/fonts/Roboto-Medium.ttf?#iefix') format('embedded-opentype'),
+    url('/src/fonts/Roboto-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('/src/fonts/Roboto-Regular.ttf');
+  src: url('/src/fonts/Roboto-Regular.ttf?#iefix') format('embedded-opentype'),
+    url('/src/fonts/Roboto-Regular.ttf') format('truetype');
+}
+

@@ -1,0 +1,15 @@
+{
+   "applinks":{
+      "apps":[],
+      "details":[
+         {
+            "appID":"ZX8KJBXVQ5.me.finan.app",
+            "paths":["*","/app"]
+         },
+         {
+            "appID":"ZX8KJBXVQ5.me.finan.app.dev",
+            "paths":["*","/app"]
+         }
+      ]
+   }
+}

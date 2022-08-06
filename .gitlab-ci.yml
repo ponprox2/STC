@@ -1,0 +1,91 @@
+image: node:14
+# image: node:13
+variables:
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+stages:
+  - build
+  - deploy
+cache:
+  paths:
+    - node_modules/
+.build:
+  stage: build
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - ./build
+    when: on_success
+
+build:dev:
+  extends: .build
+  only:
+    - develop
+  variables:
+    REACT_APP_BACKEND_BASE_URL: '$REACT_APP_BACKEND_BASE_URL'
+    REACT_APP_LAZADA_AUTH_URL: '$REACT_APP_LAZADA_AUTH_URL'
+    REACT_APP_STORE_REDIRECT_URL: '$REACT_APP_STORE_REDIRECT_URL'
+    REACT_APP_PLATFORM: '$REACT_APP_PLATFORM'
+  environment: develop
+
+
+build:stg:
+  extends: .build
+  only:
+    - master
+  variables:
+    REACT_APP_BACKEND_BASE_URL: '$REACT_APP_BACKEND_BASE_URL'
+    REACT_APP_LAZADA_AUTH_URL: '$REACT_APP_LAZADA_AUTH_URL'
+    REACT_APP_STORE_REDIRECT_URL: '$REACT_APP_STORE_REDIRECT_URL'
+    REACT_APP_PLATFORM: '$REACT_APP_PLATFORM'
+  environment: stagging
+
+build:prd:
+  extends: .build
+  only:
+    - master
+  when: manual
+  variables:
+    REACT_APP_BACKEND_BASE_URL: '$REACT_APP_BACKEND_BASE_URL'
+    REACT_APP_LAZADA_AUTH_URL: '$REACT_APP_LAZADA_AUTH_URL'
+    REACT_APP_STORE_REDIRECT_URL: '$REACT_APP_STORE_REDIRECT_URL'
+    REACT_APP_PLATFORM: '$REACT_APP_PLATFORM'
+  environment: production
+
+.deploy:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+
+deploy:dev:
+  extends: .deploy
+  only:
+    - develop
+  script:
+    - aws s3 sync ./build s3://$S3_STORAGE
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  environment: develop
+
+deploy:stg:
+  extends: .deploy
+  only:
+    - master
+  script:
+    - aws s3 sync ./build s3://$S3_STORAGE
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  environment: stagging
+
+deploy:prd:
+  extends: .deploy
+  only:
+    - master
+  when: manual
+  script:
+    - aws s3 sync ./build s3://$S3_STORAGE
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  environment: production
